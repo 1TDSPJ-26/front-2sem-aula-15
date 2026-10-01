@@ -44,7 +44,7 @@ export default function Produtos() {
   carregaProdutos();
   }, []);
 
-  const handleDelete = async(id:string) => {
+  const handleDelete = async(idExclusivo:string) => {
     try {
       const response = await fetch(`http://localhost:3001/produtos/${idExclusivo}`, {
         method: "DELETE",
