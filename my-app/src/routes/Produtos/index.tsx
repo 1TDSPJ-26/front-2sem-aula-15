@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router";
 import { CiEdit as Editar} from "react-icons/ci";
 import { RiDeleteBin6Line as Excluir } from "react-icons/ri";
 
-
-
 export default function Produtos() {
   document.title = "Produtos";
 

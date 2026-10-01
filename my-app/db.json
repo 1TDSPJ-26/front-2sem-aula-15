@@ -1,9 +1,26 @@
 {
   "produtos": [
-    { "id": "1", "nome": "Notebook", "preco": 3500, "estoque": 10, "avatar":"https://picsum.photos/id/1/200/300"},
-    { "id": "2", "nome": "Mouse", "preco": 120, "estoque": 25, "avatar":"https://picsum.photos/id/2/200/300"},
-    { "id": "3", "nome": "Teclado", "preco": 210, "estoque": 8,"avatar":"https://picsum.photos/id/3/200/300" },
-    { "id": "4", "nome": "MousePad", "preco": 210, "estoque": 8,"avatar": "https://picsum.photos/id/4/200/300"}
-    
-  ]
+    {
+      "id": "1",
+      "nome": "Notebook HP",
+      "preco": 3500,
+      "estoque": 10,
+      "avatar": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "id": "2",
+      "nome": "Mouse Óptico",
+      "preco": 120,
+      "estoque": 25,
+      "avatar": "https://picsum.photos/id/2/200/300"
+    },
+    {
+      "id": "3",
+      "nome": "Teclado",
+      "preco": 210,
+      "estoque": 8,
+      "avatar": "https://picsum.photos/id/3/200/300"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
