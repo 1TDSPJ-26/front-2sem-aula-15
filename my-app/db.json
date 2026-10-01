@@ -2,14 +2,14 @@
   "produtos": [
     {
       "id": "1",
-      "nome": "Notebook",
+      "nome": "Notebook HP",
       "preco": 3500,
       "estoque": 10,
       "avatar": "https://picsum.photos/id/1/200/300"
     },
     {
       "id": "2",
-      "nome": "Mouse",
+      "nome": "Mouse Óptico",
       "preco": 120,
       "estoque": 25,
       "avatar": "https://picsum.photos/id/2/200/300"
