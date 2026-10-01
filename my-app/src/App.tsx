@@ -1,19 +1,15 @@
-import { Outlet } from "react-router"
+import { Outlet } from 'react-router'
+import Cabecalho from "./components/Cabecalho"
 import Rodape from "./components/Rodape"
-import Menu from "./components/Menu"
-
 
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <Menu/>
-
-      <main className="mx-auto min-h-[76vh] max-w-5xl px-4 sm:px-6">
-        <Outlet/>
-      </main>
-
+    <div>
+      <Cabecalho/>
+      <Outlet/>
       <Rodape/>
     </div>
+
   )
 }
