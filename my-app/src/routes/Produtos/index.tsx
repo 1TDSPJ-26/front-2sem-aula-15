@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TipoProduto } from "../../types/types";
 import { Link, useNavigate } from "react-router";
 import { CiEdit as Editar} from "react-icons/ci";
 import { RiDeleteBin6Line as Excluir } from "react-icons/ri";
 
-
-
 export default function Produtos() {
   document.title = "Produtos";
+
+  //REF do DIALOG para o produto que será deletado:
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  //STATE do DIALOG para o produto que será deletado:
+  const[idExclusivo, setIdExclusivo] = useState<string>("");
+
 
   //Criando o redirecionador
   const navigate = useNavigate();
@@ -15,6 +19,9 @@ export default function Produtos() {
   //Estrutua que vai receber a lista, seja ela mocada ou externa!
   const [produtos, setProdutos] = useState<TipoProduto[]>([]);
   
+
+
+
   useEffect(() => {
 
     //Função para carregar os dados
