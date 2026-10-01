@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import type { Produto } from "../../types/produto";
 import { useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ export default function EditarProduto() {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (data: Produto) => {
+    const onSubmit = async (data:Produto) => {
         try {
           const response = await fetch(`http://localhost:3001/produtos/${data.id}`,{
             method: "PUT",
@@ -43,7 +43,6 @@ export default function EditarProduto() {
           }
           alert("PRODUTO ATUALIZADO COM SUCESSO!")
           navigate("/produtos")
-          const data:Produto[] = await response.json();
           console.log(data)
         } catch (error) {
           console.error(error)
