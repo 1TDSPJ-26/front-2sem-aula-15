@@ -12,6 +12,14 @@ export default function Produtos(){
     //STATE do DIALOG para o produto que será deletado:
     const[idExclusivo,setIdExclusivo] = useState<string>("");
 
+    //abrir modal
+    const abrirModal = (id:string)=>{
+        setIdExclusivo(id);
+        dialogRef.current?.showModal();
+    }
+
+    
+
     //criando o redirecionador
     const navigate = useNavigate();
 
@@ -41,10 +49,10 @@ export default function Produtos(){
         carregaProdutos();
     }, []);
 
-    const handleDelete = async(id:string)=>{
+    const handleDelete = async()=>{
         try{
 
-            const response = await fetch(`http://localhost:3001/produtos/${id}`, {
+            const response = await fetch(`http://localhost:3001/produtos/${idExclusivo}`, {
                 method: "DELETE",});
 
                 if(!response.ok){
@@ -63,6 +71,19 @@ export default function Produtos(){
     return(
         <main>
             <h2>Produtos</h2>
+            <dialog ref={dialogRef} style={{ padding: "20px", borderRadius: "8px", border: "1px solid #ccc" }}>
+                <h3>Confirmar esclusão de produto</h3>
+                <p>Tem certeza que deseja excluir esse produto?</p>
+                <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginTop: "15px" }}>
+                <button onClick={()=> dialogRef.current?.close()}>Cancelar</button>
+                <button onClick={()=> handleDelete()} style={{ background: "red", color: "white", border: "none", padding: "5px 10px", cursor: "pointer" }}>Excluir</button>
+
+
+
+                </div>
+            </dialog>
+
+
             <table border={1} style={{margin:"0 auto",borderCollapse:"collapse"}}>
                 <thead>
                     <tr>
@@ -81,7 +102,7 @@ export default function Produtos(){
                             <td>{p.preco}</td>
                             <td><img src={p.avatar} alt={p.nome} width={30}/></td>
                             <td><Link to={`/editar-produtos/${p.id}`}><Editar /></Link> | 
-                            <Excluir style={{cursor:"pointer"}} onClick={()=>handleDelete(p.id)}/>
+                            <Excluir style={{cursor:"pointer"}} onClick={()=>abrirModal(p.id)}/>
                             </td>
                         </tr>
                     ))}
