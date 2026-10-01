@@ -22,6 +22,11 @@ export default function Produtos() {
   // State para o dialog para o produto que será deletado:
   const [idExclusivo, setIdExclusivo] = useState<string>("");
 
+  const abrirModal = (id:string)=>{
+    setIdExclusivo(id);
+    dialogRef.current?.showModal();
+  }
+
   useEffect(() => {
   const carregaProdutos = async () => {
     try{
@@ -39,11 +44,9 @@ export default function Produtos() {
   carregaProdutos();
   }, []);
 
-  
-
   const handleDelete = async(id:string) => {
     try {
-      const response = await fetch(`http://localhost:3001/produtos/${id}`, {
+      const response = await fetch(`http://localhost:3001/produtos/${idExclusivo}`, {
         method: "DELETE",
       });
       if (!response.ok){
@@ -59,6 +62,14 @@ export default function Produtos() {
   return (
     <main style={{ padding: '20px', fontFamily: 'sans-serif' }}>
       <h1>Painel de Produtos</h1>
+      <dialog ref={dialogRef} style={{ padding: "20px", borderRadius: "8px", border: "1px solid #ccc" }}>
+        <h3>Confirmar exclusão de produto</h3>
+        <p>Tem certeza que deseja excluir o produto</p>
+        <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginTop: "15px" }}>
+          <button onClick={()=>dialogRef.current?.close()} style={{ background: "red", color: "white", border: "none", padding: "5px 10px", cursor: "pointer" }}>Cancelar Exclusão</button>
+          <button onClick={()=>handleDelete} style={{ background: "red", color: "white", border: "none", padding: "5px 10px", cursor: "pointer" }}>Excluir</button>
+        </div>
+      </dialog>
       <p>Confira abaixo a lista de itens cadastrados no sistema:</p>
 
       {/* Tabela com borda e espaçamento para ficar fácil de ler */}
@@ -98,7 +109,7 @@ export default function Produtos() {
               <td>{item.descricao}</td>
               <td>
                 <Link to={`/editar-produto/${item.id}`}><Editar className='w-10 h-10'/></Link>|
-                <Excluir style={{cursor:'pointer'}} onClick={()=> handleDelete(item.id)} className='w-10 h-10'/>
+                <Excluir style={{cursor:'pointer'}} onClick={()=> abrirModal(item.id)} className='w-10 h-10'/>
               </td>
             </tr>
           ))}
