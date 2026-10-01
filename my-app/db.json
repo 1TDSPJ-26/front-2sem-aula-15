@@ -13,13 +13,6 @@
       "preco": 120,
       "estoque": 25,
       "avatar": "https://picsum.photos/id/2/200/300"
-    },
-    {
-      "id": "3",
-      "nome": "Teclado",
-      "preco": 210,
-      "estoque": 8,
-      "avatar": "https://picsum.photos/id/3/200/300"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
