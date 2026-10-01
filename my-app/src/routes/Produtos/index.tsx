@@ -1,5 +1,5 @@
 // 1. Ferramentas do React
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // 2. O molde que criamos
 import { type Produto } from '../../types/produto';
@@ -17,6 +17,10 @@ export default function Produtos() {
   // - Ele começa vazio: []
   // - Avisamos ao TypeScript que ele vai guardar uma lista de TipoProduto: <TipoProduto[]>
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  // Ref para o dialog para o produto que será deletado:
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  // State para o dialog para o produto que será deletado:
+  const [idExclusivo, setIdExclusivo] = useState<string>("");
 
   useEffect(() => {
   const carregaProdutos = async () => {
@@ -35,33 +39,8 @@ export default function Produtos() {
   carregaProdutos();
   }, []);
 
-    /*
-    No caso do Post
-  const carregaProdutos = async () => {
-    try{
-      const response = await fetch(`http://localhost:3001/produtos/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringfy({"nome": "criando", "preco": 0, "descricao": "x", "avatar": "url"})
-      if (!response.ok){
-        throw new Error (`Falha no cadastro do produto... ${response.status} - ${response.statusText}`)
-      }
-      alert("Produto cadastrado com sucesso")
-      
-    } catch (error) {
-      console.error(error) 
-    } 
-      No caso do Put
+  
 
-      const response = await fetch(`http://localhost:3001/produtos/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringfy({"id": id, "nome": "atualziando", "preco": 0, "descricao": "x", "avatar": "url"})
-    */
   const handleDelete = async(id:string) => {
     try {
       const response = await fetch(`http://localhost:3001/produtos/${id}`, {
