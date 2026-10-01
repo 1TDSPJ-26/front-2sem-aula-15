@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import type { TipoProduto } from "../../types/types";
 import { useForm } from "react-hook-form";
 
@@ -8,7 +8,7 @@ export default function EditarProdutos() {
 
     const { id } = useParams<string>();
 
-    const {register, reset, setValue, formState:{errors}} = useForm<TipoProduto>({
+    const {register, reset, handleSubmit, setValue, formState:{errors}} = useForm<TipoProduto>({
         defaultValues: { id: "", nome: "", preco: 0, estoque: 0, avatar: "" },
         mode: "onBlur"});
 
@@ -36,11 +36,37 @@ export default function EditarProdutos() {
 
     }, [])
 
+    const navigate = useNavigate();
+
+    const onSubmit = async (data:TipoProduto)=>{
+        try{
+            const response = await fetch(`http://localhost:3001/produtos/${data.id}`, {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "application/json",   
+                },
+                body: JSON.stringify(data)
+            });
+
+                if (!response.ok){
+                    throw new Error (`Falha na atualização do produto... ${response.status} - ${response.statusText}`)
+                }
+
+                alert("Produto atualizado com sucesso!");
+                navigate("/produtos");
+            }
+        catch (error){
+            console.log(error);
+            
+        }
+
+    }
+
     return (
         <main>
             <h2>Editar Produtos</h2>
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset>
                     <legend>Dados do Produto</legend>
                     <div>
@@ -58,6 +84,11 @@ export default function EditarProdutos() {
                         <input type="number" step={1} id="estoque" {...register("estoque", { required: "É obrigatório um estoque para o produto!", min: { value: 1, message: "O estoque não pode ser negativo!" } })} />
                         {errors.estoque?.message && <span style={{ color: "#ff0000" }}>{errors.estoque?.message}</span>}
                     </div>
+
+                        <div>
+                            <button type="submit">Atualizar</button>
+                        </div>
+                
                 </fieldset>
             </form>
 
