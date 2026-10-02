@@ -7,6 +7,7 @@ export default function Menu() {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/produtos">Produto</Link></li>
                 <li><Link to="/users/git">Lista de Usuarios Git</Link></li>
+                <li><Link to="/cad-produto/">Cadastro de Produtos</Link></li>
             </ul>
         </nav>
     )
